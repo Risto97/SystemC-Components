@@ -1,3 +1,28 @@
+option(ENABLE_HUNTER "Enable the use of hunter in standalone build" ON)
+if(ENABLE_HUNTER)
+    set(HUNTER_URL "https://github.com/Risto97/hunter/archive/refs/tags/v0.25.9.rc1.tar.gz")
+    set(HUNTER_SHA1 "be90c18e976bbbddc360617fbd8204e923ea3937")
+
+    set(HUNTER_Boost_VERSION 1.86.0)
+    set(HUNTER_Boost_COMPONENTS system date_time filesystem program_options)
+
+    set(HUNTER_jsoncpp_VERSION 1.9.5-b1)
+    set(HUNTER_yaml-cpp_VERSION 0.6.3)
+    set(HUNTER_spdlog_VERSION 1.12.0-p0)
+    set(HUNTER_fmt_VERSION 10.1.1)
+    set(HUNTER_zlib_VERSION 1.3.0-p0)
+    set(HUNTER_lz4_VERSION 1.9.2-p0)
+    set(HUNTER_rapidjson_VERSION 1.1.0-b557259-p0)
+    set(HUNTER_systemc_VERSION 3.0.1)
+    set(HUNTER_systemc-cci_VERSION 1.0.1.hunter)
+
+    set(HUNTER_PACKAGES Boost jsoncpp yaml-cpp spdlog fmt ZLIB lz4 RapidJSON systemc systemc-cci)
+
+    include(FetchContent)
+    FetchContent_Declare(SetupHunter GIT_REPOSITORY https://github.com/cpp-pm/gate)
+    FetchContent_MakeAvailable(SetupHunter)
+endif()
+
 cmake_minimum_required(VERSION 3.20)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${CMAKE_CURRENT_BINARY_DIR}) # project specific cmake dir
 cmake_policy(SET CMP0077 NEW)
@@ -6,7 +31,6 @@ project(scc VERSION 2024.06 LANGUAGES CXX C)
 
 option(USE_CWR_SYSTEMC "Use Synopsys Virtualizer SystemC" OFF)
 option(USE_NCSC_SYSTEMC "Cadence Xcelium SystemC" OFF)
-option(ENABLE_HUNTER "Enable the use of hunter in standalone build" ON)
 option(BUILD_SCC_DOCUMENTATION "Create and install the HTML based API documentation (requires Doxygen)" OFF)
 option(FULL_TRACE_TYPE_LIST "Test for extended set of templated datatypes" OFF)
 #Note: this needs to match the SystemC kernel build options
@@ -24,17 +48,6 @@ if(CMAKE_PROJECT_NAME STREQUAL "scc")
 	set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
     include(GNUInstallDirs)
-    if(ENABLE_HUNTER)
-        set(HUNTER_URL "https://github.com/Risto97/hunter/archive/refs/tags/v0.25.9.rc1.tar.gz")
-        set(HUNTER_SHA1 "be90c18e976bbbddc360617fbd8204e923ea3937")
-
-        set(HUNTER_Boost_COMPONENTS system date_time filesystem program_options)
-        set(HUNTER_PACKAGES jsoncpp yaml-cpp spdlog fmt ZLIB lz4 RapidJSON systemc systemc-cci)
-
-        include(FetchContent)
-        FetchContent_Declare(SetupHunter GIT_REPOSITORY https://github.com/cpp-pm/gate)
-        FetchContent_MakeAvailable(SetupHunter)
-    endif()
     
     set(Boost_NO_BOOST_CMAKE ON) #  Don't do a find_package in config mode before searching for a regular boost install.
     option(ENABLE_CLANG_TIDY "Add clang-tidy automatically to builds" OFF)
