@@ -1,7 +1,7 @@
 option(ENABLE_HUNTER "Enable the use of hunter in standalone build" ON)
 if(ENABLE_HUNTER)
-    set(HUNTER_URL "https://github.com/Risto97/hunter/archive/refs/tags/v0.25.9.rc1.tar.gz")
-    set(HUNTER_SHA1 "be90c18e976bbbddc360617fbd8204e923ea3937")
+    set(HUNTER_URL "https://github.com/Risto97/hunter/archive/refs/tags/v0.25.9.rc4.tar.gz")
+    set(HUNTER_SHA1 "ddf3f818f67ac0e9f188accdb0822329620cb037")
 
     set(HUNTER_Boost_VERSION 1.86.0)
     set(HUNTER_Boost_COMPONENTS system date_time filesystem program_options)
