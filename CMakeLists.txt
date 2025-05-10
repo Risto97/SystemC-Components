@@ -1,10 +1,3 @@
-find_package(Git REQUIRED)
-if(NOT EXISTS ${CMAKE_CURRENT_LIST_DIR}/third_party/axi_chi/CMakeLists.txt)
-    execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init
-        WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
-        COMMAND_ERROR_IS_FATAL ANY)
-endif()
-
 option(ENABLE_HUNTER "Enable the use of hunter in standalone build" ON)
 if(ENABLE_HUNTER)
     set(HUNTER_URL "https://github.com/Risto97/hunter/archive/refs/tags/v0.25.9.rc4.tar.gz")
